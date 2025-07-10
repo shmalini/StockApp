@@ -7,7 +7,7 @@ Built with Jetpack Compose that lets users browse and favorite financial assets 
 ## 🌟 Features
 
 🔍 Search for stocks by name or symbol  
-⭐ Mark favorites, switch filters (All / Favourites)
+⭐ Mark favorites, switch filters (All / Favourites) 
 🔄 Pull-to-refresh with dynamic price changes  
 
 ---
