@@ -6,9 +6,9 @@ Built with Jetpack Compose that lets users browse and favorite financial assets 
 
 ## 🌟 Features
 
-🔍 Search for stocks by name or symbol  
-⭐ Mark favorites, switch filters (All / Favourites) 
-🔄 Pull-to-refresh with dynamic price changes  
+- 🔍 Search for stocks by name or symbol  
+- ⭐ Mark favorites and switch filters (All / Favourites)  
+- 🔄 Pull-to-refresh with dynamic price changes  
 
 ---
 
@@ -43,25 +43,23 @@ git clone https://github.com/shmalini/StockApp.git
 
 Open in Android Studio
 
-Connect an emulator or device (Min SDK: 24, Target SDK: 35)
+Connect an emulator or device  
+(Min SDK: 24, Target SDK: 35)
 
+📥 **You may also [download the APK here](#)**  
 
-## You may also download the APK here: *link*
+---
 
-
-<br>
 ## 📂 Project Structure Highlights
-StockList.kt — main UI logic with search, filter, and refresh
 
-StockItem.kt — reusable stock card UI
+- `StockList.kt` — main UI logic with search, filter, and refresh  
+- `StockItem.kt` — reusable stock card UI  
+- `StockViewModel.kt` — handles data, filters, and state management  
+- `assets/stocks.json` — preloaded stock data 
+- Favorites are saved via **SharedPreferences** (no sign-in needed)
 
-StockViewModel.kt — handles data, filters, and state management
+---
 
-assets/stocks.json — preloaded stock data (no API)
-
-Favorites are saved via SharedPreferences (no sign-in needed)
-
-
-<br>
 ## Author
-Sharifah Malini
+
+**Sharifah Malini**
