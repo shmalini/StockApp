@@ -55,9 +55,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // ViewModel in Compose 🧠
+    // ViewModel in Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
+    implementation("androidx.compose.material:material-icons-extended")
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation ("com.google.accompanist:accompanist-swiperefresh:0.31.5-beta")
+
 
 
     // Gson for JSON parsing 📦
@@ -72,4 +77,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
 }

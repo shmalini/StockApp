@@ -4,75 +4,120 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
-import com.example.stockscreen.StockViewModel
-import com.example.stockscreen.Stock
-import androidx.compose.runtime.livedata.observeAsState
-
-
-import androidx.lifecycle.viewmodel.compose.viewModel
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StockList(viewModel: StockViewModel, modifier: Modifier = Modifier) {
+fun StockList(
+    viewModel: StockViewModel,
+    modifier: Modifier = Modifier
+) {
     val stocks by viewModel.filteredStocks.observeAsState(emptyList())
     val query by viewModel.query.observeAsState("")
+    val filterType by viewModel.filterType.observeAsState(StockViewModel.FilterType.ALL)
+    val isRefreshing by viewModel.isRefreshing.observeAsState(false)
+    val lastUpdated by viewModel.lastUpdated.observeAsState()
 
-    Column(modifier = modifier.padding(16.dp)) {
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
 
-        // 🔍 Search bar
-        androidx.compose.material3.OutlinedTextField(
-            value = query,
-            onValueChange = { viewModel.onQueryChanged(it) },
-            label = { Text("Search stocks") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            singleLine = true
-        )
-
-        // 🔁 Refresh button
-        Button(onClick = { viewModel.refreshStocks() }) {
-            Text("Refresh")
+    Scaffold(
+        containerColor = Color.White,
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text("STOCKS", color = Color(0xFF00D1D1), fontWeight = FontWeight.Bold)
+                },
+                actions = {
+                    IconButton(onClick = { /* TODO: Menu */ }) {
+                        Icon(Icons.Default.MoreVert, contentDescription = "Menu")
+                    }
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(
+                    containerColor = Color.White
+                )
+            )
         }
+    ) { innerPadding ->
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(top = innerPadding.calculateTopPadding() - 34.dp, start = 16.dp, end = 16.dp, bottom = innerPadding.calculateBottomPadding())
+        ) {
+            //Spacer(modifier = Modifier.height(2.dp)) // Reduced spacer
 
-        Spacer(modifier = Modifier.height(8.dp))
+            // Last updated time
+            lastUpdated?.let {
+                Text(
+                    text = it,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+            }
 
-        // 📃 Stock list
-        LazyColumn {
-            items(stocks) { stock: Stock ->
-                StockItem(stock = stock)
-                Spacer(modifier = Modifier.height(8.dp))
+            // Search bar with filter icon
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 12.dp)
+            ) {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = viewModel::onQueryChanged,
+                    placeholder = { Text("Search stocks") },
+                    modifier = Modifier.weight(1f),
+                    singleLine = true,
+                    shape = MaterialTheme.shapes.medium
+                )
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                IconButton(
+                    onClick = { /* TODO: filter sheet */ },
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color(0xFF00D1D1), shape = MaterialTheme.shapes.medium)
+                ) {
+                    Icon(Icons.Default.FilterList, contentDescription = "Filter", tint = Color.White)
+                }
+            }
+
+            // Filter buttons (All, Favourites)
+            FilterRow(
+                selected = filterType,
+                onFilterSelected = viewModel::onFilterChanged,
+                modifier = Modifier.padding(bottom = 12.dp)
+            )
+
+            // Pull to refresh + stock list
+            SwipeRefresh(
+                state = swipeRefreshState,
+                onRefresh = viewModel::refreshStocks
+            ) {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    items(stocks) { stock ->
+                        StockItem(
+                            stock = stock,
+                            onToggleFav = viewModel::toggleFav,
+
+                            elevation = 0.dp
+                        )
+                    }
+                }
             }
         }
-    }
-}
-
-
-@Composable
-fun StockItem(stock: Stock) {
-    val changeColor = when {
-        stock.stockPrice.priceChange > 0 -> Color(0xFFB6F2C0) // green
-        stock.stockPrice.priceChange < 0 -> Color(0xFFFFC0C0) // red
-        else -> Color.LightGray
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(changeColor)
-            .padding(16.dp)
-    ) {
-        Text(text = stock.name, fontWeight = FontWeight.Bold)
-        Text(text = "${stock.symbol} - ${stock.stockPrice.currentPrice.amount} ${stock.stockPrice.currentPrice.currency}")
-        Text(text = "Change: ${stock.stockPrice.priceChange} (${stock.stockPrice.percentageChange}%)")
     }
 }
