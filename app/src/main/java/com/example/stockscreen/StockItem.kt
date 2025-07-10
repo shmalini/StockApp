@@ -80,12 +80,13 @@ fun StockItem(
                 Text(
                     text = stock.symbol,
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black // ✅ Force black text
                 )
                 Text(
                     text = stock.name,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
+                    color = Color.DarkGray // ✅ Slightly lighter
                 )
             }
 
@@ -95,7 +96,8 @@ fun StockItem(
                 Text(
                     text = "${stock.stockPrice.currentPrice.amount} ${stock.stockPrice.currentPrice.currency}",
                     style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Black
                 )
                 Text(
                     text = "${stock.stockPrice.percentageChange}%",

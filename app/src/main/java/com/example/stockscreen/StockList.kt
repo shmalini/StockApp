@@ -53,7 +53,7 @@ fun StockList(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding() - 34.dp, start = 16.dp, end = 16.dp, bottom = innerPadding.calculateBottomPadding())
+                .padding(top = innerPadding.calculateTopPadding() - 24.dp, start = 16.dp, end = 16.dp, bottom = innerPadding.calculateBottomPadding())
         ) {
             //Spacer(modifier = Modifier.height(2.dp)) // Reduced spacer
 
@@ -62,7 +62,7 @@ fun StockList(
                 Text(
                     text = it,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = Color.Gray,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
             }

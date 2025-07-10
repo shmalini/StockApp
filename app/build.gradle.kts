@@ -14,7 +14,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -43,31 +42,30 @@ android {
 }
 
 dependencies {
-    // Core Android + Compose BOM
+    // Compose BOM
+    implementation(platform(libs.androidx.compose.bom))
+
+    // Core Android & Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-
-    // UI + Material 3
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
-    // ViewModel in Compose
+    implementation(libs.androidx.runtime.livedata)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
     implementation("androidx.compose.material:material-icons-extended")
 
+    // Image loading
     implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation ("com.google.accompanist:accompanist-swiperefresh:0.31.5-beta")
 
+    // Pull to refresh
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.31.5-beta")
 
-
-    // Gson for JSON parsing 📦
+    // JSON
     implementation("com.google.code.gson:gson:2.13.1")
-    implementation(libs.androidx.runtime.livedata)
 
     // Testing
     testImplementation(libs.junit)
@@ -77,6 +75,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-
 }
+

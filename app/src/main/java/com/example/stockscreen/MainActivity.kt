@@ -17,7 +17,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            StockScreenTheme {
+
+            StockScreenTheme(
+                darkTheme = false // Forces lightmode
+            ) {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
@@ -27,7 +30,7 @@ class MainActivity : ComponentActivity() {
                         applicationContext.getSharedPreferences("favs", MODE_PRIVATE)
                     )
 
-                    // ✅ Inline ViewModel factory using Compose viewModel { ... }
+                    // Inline ViewModel factory using Compose viewModel { ... }
                     val viewModel: StockViewModel = viewModel {
                         StockViewModel(repo, favRepo)
                     }
