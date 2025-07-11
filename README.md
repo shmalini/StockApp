@@ -1,6 +1,6 @@
 # 📈 StockScreen – Android App
 
-Built with Jetpack Compose that lets users browse and favorite financial assets like stocks. Designed with a clean UI and smooth user experience, this project demonstrates real-time UI updates, local storage for favorites, and pull-to-refresh functionality.
+Built with Jetpack Compose that lets users browse and favorite their preferred stock. Designed with a clean UI and smooth user experience, this project demonstrates real-time UI updates, local storage for favorites, and pull-to-refresh functionality.
 
 <br>
 
@@ -12,17 +12,16 @@ Built with Jetpack Compose that lets users browse and favorite financial assets 
 
 ---
 
-<br>
-
 ## 📸 Demo Videos
 
-**Search & Refresh Demo**  
-*video*
+### 🔍 Search & Refresh Demo  
+🎬 [Click to watch](https://drive.google.com/file/d/1eBoWBN5sU_wkK85Tdz7xtiFdh0KAqfKu/view?usp=drive_link)
 
-**Favorite & Unfavorite Flow**  
-*video*
+### ⭐ Favorite & Unfavorite  
+🎬 [Click to watch](https://drive.google.com/file/d/1NGYepxS2R-XVvbWs50KCObuh9DDry-FD/view?usp=sharing)
 
-<br>
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -32,21 +31,18 @@ Built with Jetpack Compose that lets users browse and favorite financial assets 
 - Coil for image loading  
 - Gson for local data  
 
-<br>
+---
 
 ## 🚀 How to Run
 
-Clone the repository:
-
-```bash
+1. Clone the repository:
 git clone https://github.com/shmalini/StockApp.git
 
-Open in Android Studio
+2. Open in Android Studio
 
-Connect an emulator or device  
-(Min SDK: 24, Target SDK: 35)
+3. Connect an emulator or device (Min SDK: 24, Target SDK: 35)
 
-📥 **You may also [download the APK here](#)**  
+📥 **You may also [download the APK here](https://github.com/shmalini/StockScreen/releases/download/v1.0-beta/Stock.apk)**  
 
 ---
 
@@ -61,5 +57,4 @@ Connect an emulator or device
 ---
 
 ## Author
-
 **Sharifah Malini**
