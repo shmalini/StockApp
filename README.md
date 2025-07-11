@@ -42,7 +42,7 @@ git clone https://github.com/shmalini/StockApp.git
 
 3. Connect an emulator or device (Min SDK: 24, Target SDK: 35)
 
-📥 **You may also [download the APK here](https://github.com/shmalini/StockScreen/releases/download/v1.0-beta/Stock.apk)**  
+📥 **You may also [download the APK here](https://github.com/shmalini/StockApp/releases/download/v1.0-beta/Stock.apk)**  
 
 ---
 
